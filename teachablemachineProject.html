@@ -6,7 +6,6 @@
   }
 </style>
 
-
 <div class="center">
     <button type="button" onclick="init()">Click to Start</button>
 </div>
@@ -28,8 +27,10 @@
     }
     div {
         text-align: center;
-    }
+    }  
 </style>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -76,7 +77,7 @@
         randomItem()
         let trin = setInterval(() => {
             Ntime = Ntime-1
-            document.getElementById("Time").innerHTML= "เวลา = "+Ntime
+            document.getElementById("Time").innerHTML= "เหลือเวลาอีก!!!  =  "+Ntime
             if (Ntime == 0){
                 clearInterval(trin)
             }
@@ -88,21 +89,22 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-    function addOne(a){
-        return a+1
+    const addOne = (a) => {
+        return a + 1;
+    };
 
-    }
-    function randomItem() {
-        let a = Math.random()
+    const randomItem = () => {
+        let a = Math.random();
         if (a > 0.66) {
-            landom = "ขวดน้ำ"
-        }else if (a > 0.33){
-            landom = "แก้วน้ำ"
-        }else {
-            landom = "ลูกบาสเก็ตบอล"
+            landom = "ขวดน้ำ";
+        } else if (a > 0.33) {
+            landom = "แก้วน้ำ";
+        } else {
+            landom = "ลูกบาสเก็ตบอล";
         }
         document.getElementById("landom").innerHTML= landom
-    }
+    };
+
 
 
     // run the webcam image through the image model
