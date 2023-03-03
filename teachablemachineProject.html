@@ -1,19 +1,36 @@
-<div>64020675 Patiwat jumsin</div>
+<div style="font-size: 35px;">64020675 Patiwat jumsin</div>
 
 <style>
     .center {
         text-align: center;
-  }
+    }
+
+    /* Playful button animation */
+    button:hover {
+        animation: shake 0.5s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        20% { transform: translateX(-2px) rotate(-2deg); }
+        40% { transform: translateX(2px) rotate(2deg); }
+        60% { transform: translateX(-2px) rotate(-2deg); }
+        80% { transform: translateX(2px) rotate(2deg); }
+        100% { transform: translateX(0) rotate(0); }
+    }
 </style>
 
 <div class="center">
-    <button type="button" onclick="init()">Click to Start</button>
+    <button style="background-color: #ff9900; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; font-weight: bold;" type="button" onclick="init()" onmouseover="this.innerHTML='Click to Start!!!'" onmouseout="this.innerHTML='Click to Start!!!'">Click to Start!!!</button>
 </div>
+
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <h1 id="result"></h1>
 <h1 id="landom"></h1>
 <h1 id="Time"></h1>
+
 <style>
     body {
         background-image: url("https://i.pinimg.com/564x/d3/4b/32/d34b327813088504e303d9fa16f7bf34.jpg");
@@ -22,17 +39,19 @@
     button {
         text-align: center;
     }
+
     h1 {
         text-align: center;
     }
+
     div {
         text-align: center;
-    }  
+    }
 </style>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
 <script type="text/javascript">
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -47,7 +66,6 @@
     let score = 0
     let Ntime = 30
 
-
     // Load the image model and setup the webcam
     async function init() {
         const modelURL = URL + "model.json";
@@ -57,6 +75,7 @@
         // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
         // or files from your local hard drive
         // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
@@ -159,3 +178,4 @@
         document.getElementById("result").innerHTML=score;
     }
 </script>
+
