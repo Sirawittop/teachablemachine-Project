@@ -14,6 +14,7 @@
 <div id="label-container"></div>
 <h1 id="result"></h1>
 <h1 id="landom"></h1>
+<h1 id="Time"></h1>
 <style>
     body {
         background-image: url("https://i.pinimg.com/564x/d3/4b/32/d34b327813088504e303d9fa16f7bf34.jpg");
@@ -43,6 +44,8 @@
     let count1f = 0,count2f=0,count3f = 0
     let landom = ""
     let score = 0
+    let Ntime = 30
+
 
     // Load the image model and setup the webcam
     async function init() {
@@ -58,7 +61,7 @@
 
         // Convenience function to setup a webcam
         const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+        webcam = new tmImage.Webcam(500, 400, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
@@ -71,6 +74,13 @@
         }
 
         randomItem()
+        let trin = setInterval(() => {
+            Ntime = Ntime-1
+            document.getElementById("Time").innerHTML= "เวลา = "+Ntime
+            if (Ntime == 0){
+                clearInterval(trin)
+            }
+            }, 1000)
     }
 
     async function loop() {
@@ -104,6 +114,7 @@
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
+        if (Ntime >= 1){
         if (prediction[0].className == landom){
         if (prediction[0].probability.toFixed(2)>0.8 &&count1f ==0){
             count1 = addOne(count1)
@@ -112,6 +123,8 @@
             score = score + 1
         }
     }
+}
+        if (Ntime >= 1){
         if (prediction[1].className == landom){
         if (prediction[1].probability.toFixed(2)>0.8 &&count2f ==0){
             count2 = addOne(count2)
@@ -120,6 +133,9 @@
             score = score + 1
         }
     }
+
+}
+        if (Ntime >= 1){
         if (prediction[2].className == landom){
         if (prediction[2].probability.toFixed(2)>0.8 &&count3f ==0){
             count3 = addOne(count3)
@@ -128,6 +144,7 @@
             score = score + 1          
         }
     }
+}
         if(prediction[0].probability.toFixed(2)<0.2){
             count1f = 0;
         }
